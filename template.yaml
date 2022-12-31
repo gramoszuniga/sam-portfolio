@@ -1,0 +1,24 @@
+# Author: Gonzalo Ramos Zúñiga
+# Since: 2022/12/30
+
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  PortfolioFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./target/sam-portfolio.jar
+      Handler: samportfolio.Application::handleRequest
+      MemorySize: 512
+      Runtime: java11
+      Timeout: 60
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PortfolioSimpleTable
+  PortfolioSimpleTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: key
+        Type: String
+      TableName: portfolio
