@@ -1,20 +1,49 @@
 # Author: Gonzalo Ramos Zúñiga
 # Since: 2022/12/30
 
-AWSTemplateFormatVersion: 2010-09-09
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+Parameters:
+  Stage:
+    Type: String
+    AllowedValues:
+      - dev
+      - prod
 Resources:
+  PortfolioApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+      Variables:
+        AWS_LAMBDA_ALIAS: !Ref Stage
   PortfolioFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./target/sam-portfolio.jar
+      AutoPublishAlias: !Ref Stage
+      CodeUri: .
+      Environment:
+        Variables:
+          DYNAMODB_TABLE: !Ref PortfolioSimpleTable
+      Events:
+        GetPortfolio:
+          Type: Api
+          Properties:
+            Method: get
+            Path: /portfolio
+            RestApiId: !Ref PortfolioApi
+        PutPortfolio:
+          Type: Api
+          Properties:
+            Method: put
+            Path: /portfolio
+            RestApiId: !Ref PortfolioApi
       Handler: samportfolio.Application::handleRequest
       MemorySize: 512
-      Runtime: java11
-      Timeout: 60
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref PortfolioSimpleTable
+      Runtime: java11
+      Timeout: 20
   PortfolioSimpleTable:
     Type: AWS::Serverless::SimpleTable
     Properties:

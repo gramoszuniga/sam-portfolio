@@ -1,5 +1,6 @@
 package samportfolio;
 
+import com.google.gson.Gson;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
@@ -17,8 +18,12 @@ public class DependencyFactory {
 
     public static DynamoDbEnhancedClient dynamoDbEnhancedClient() {
         return DynamoDbEnhancedClient.builder().dynamoDbClient(DynamoDbClient.builder()
-                .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
-                .region(Region.US_EAST_1).httpClientBuilder(UrlConnectionHttpClient.builder()).build()).build();
+                .credentialsProvider(EnvironmentVariableCredentialsProvider.create()).region(Region.US_EAST_1)
+                .httpClientBuilder(UrlConnectionHttpClient.builder()).build()).build();
+    }
+
+    public static Gson gson() {
+        return new Gson();
     }
 
 }
