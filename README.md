@@ -4,7 +4,7 @@ AWS SAM function for static personal portfolio website.
 
 ## Tech Stack
 
-**Server:** Java 11, AWS SAM, DynamoDB
+**Server:** Java 11, AWS SAM, API Gateway, DynamoDB
 
 ## Run Locally
 
@@ -20,16 +20,23 @@ Go to the project directory
   cd sam-portfolio
 ```
 
-Install dependencies
+Install dependencies and build SAM function
 
 ```bash
-  mvn clean install
+  sam build
 ```
 
-Start the server
+Start API Gateway locally
 
 ```bash
-  sam local invoke
+  sam local start-api
+```
+
+Test end-points
+
+```bash
+    curl --request GET http://localhost:3000/portfolio
+    curl --request PUT http://localhost:3000/portfolio
 ```
 
 ## Acknowledgements
