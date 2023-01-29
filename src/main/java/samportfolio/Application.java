@@ -20,7 +20,7 @@ import java.util.Collections;
  **/
 public class Application implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    public static final String PORTFOLIO = "portfolio";
+    public static final String PORTFOLIO = System.getenv("DYNAMODB_TABLE");
     public static final String TOTAL_VISITORS = "total_visitors";
     private final DynamoDbEnhancedClient dynamoDbEnhancedClient;
     private final Gson gson;

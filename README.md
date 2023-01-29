@@ -29,14 +29,14 @@ Install dependencies and build SAM function
 Start API Gateway locally
 
 ```bash
-  sam local start-api
+  sam local start-api -n env.json
 ```
 
 Test end-points
 
 ```bash
-    curl --request GET http://localhost:3000/portfolio
-    curl --request PUT http://localhost:3000/portfolio
+  curl --request GET http://localhost:3000/portfolio
+  curl --request PUT http://localhost:3000/portfolio
 ```
 
 ## Acknowledgements
