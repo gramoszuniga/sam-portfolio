@@ -21,6 +21,13 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       Name: portfolio
+      Domain:
+        CertificateArn: !Ref PortfolioCertificate
+        DomainName: !Sub "api.${DomainName}"
+        EndpointConfiguration: REGIONAL
+        Route53:
+          HostedZoneId: !Ref HostedZoneId
+        SecurityPolicy: TLS_1_2
       StageName: !Ref Stage
       Variables:
         AWS_LAMBDA_ALIAS: !Ref Stage
