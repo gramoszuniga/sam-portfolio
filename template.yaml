@@ -5,6 +5,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Parameters:
+  DomainName:
+    Type: String
+  HostedZoneId:
+    Type: String
   Stage:
     Type: String
     AllowedValues:
@@ -20,6 +24,17 @@ Resources:
       StageName: !Ref Stage
       Variables:
         AWS_LAMBDA_ALIAS: !Ref Stage
+  # Certificate Manager
+  PortfolioCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      DomainValidationOptions: # DomainName & HostedZoneId required when ValidationMethod = DNS
+        - DomainName: !Ref DomainName
+          HostedZoneId: !Ref HostedZoneId
+      SubjectAlternativeNames:
+        - !Sub "*.${DomainName}"
+      ValidationMethod: DNS
   # Lambda
   PortfolioFunction:
     Type: AWS::Serverless::Function
