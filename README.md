@@ -23,7 +23,7 @@ Go to the project directory
 Install dependencies and build SAM function
 
 ```bash
-  sam build
+  sam build --use-container --container-env-var-file env.json
 ```
 
 Start API Gateway locally
