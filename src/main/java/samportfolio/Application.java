@@ -12,7 +12,7 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.http.HttpStatusCode;
 import software.amazon.awssdk.http.SdkHttpMethod;
 
-import java.util.Collections;
+import java.util.HashMap;
 
 /**
  * @author : Gonzalo Ramos Zúñiga
@@ -24,10 +24,14 @@ public class Application implements RequestHandler<APIGatewayProxyRequestEvent, 
     public static final String TOTAL_VISITORS = "total_visitors";
     private final DynamoDbEnhancedClient dynamoDbEnhancedClient;
     private final Gson gson;
+    private final HashMap<String, String> headers = new HashMap<>();
 
     public Application() {
         dynamoDbEnhancedClient = DependencyFactory.dynamoDbEnhancedClient();
         gson = DependencyFactory.gson();
+        headers.put("Access-Control-Allow-Headers", "Content-Type");
+        headers.put("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
+        headers.put("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -45,7 +49,7 @@ public class Application implements RequestHandler<APIGatewayProxyRequestEvent, 
             response = gson.toJson(updatedPortfolio);
         }
         return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.OK).withIsBase64Encoded(Boolean.FALSE)
-                .withHeaders(Collections.emptyMap()).withBody(response);
+                .withHeaders(headers).withBody(response);
     }
 
 }

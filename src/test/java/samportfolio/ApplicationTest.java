@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ApplicationTest {
 
-    public static final String PORTFOLIO = "portfolio";
+    public static final String PORTFOLIO = System.getenv("DYNAMODB_TABLE");
     public static final String TOTAL_VISITORS = "total_visitors";
     public static final String GET = "GET";
     public static final String PUT = "PUT";

@@ -20,6 +20,10 @@ Resources:
   PortfolioApi:
     Type: AWS::Serverless::Api
     Properties:
+      Cors:
+        AllowHeaders: "'Content-Type'"
+        AllowMethods: "'OPTIONS,POST,GET'"
+        AllowOrigin: "'*'"
       Name: portfolio
       Domain:
         CertificateArn: !Ref PortfolioCertificate
