@@ -30,7 +30,7 @@ public class Application implements RequestHandler<APIGatewayProxyRequestEvent, 
         dynamoDbEnhancedClient = DependencyFactory.dynamoDbEnhancedClient();
         gson = DependencyFactory.gson();
         headers.put("Access-Control-Allow-Headers", "Content-Type");
-        headers.put("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
+        headers.put("Access-Control-Allow-Methods", "GET,OPTIONS,PUT");
         headers.put("Access-Control-Allow-Origin", "*");
     }
 

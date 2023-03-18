@@ -22,7 +22,7 @@ Resources:
     Properties:
       Cors:
         AllowHeaders: "'Content-Type'"
-        AllowMethods: "'OPTIONS,POST,GET'"
+        AllowMethods: "'GET,OPTIONS,PUT'"
         AllowOrigin: "'*'"
       Name: portfolio
       Domain:
