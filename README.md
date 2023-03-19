@@ -6,6 +6,10 @@ AWS SAM function for static personal portfolio website.
 
 **Server:** Java 11, AWS SAM, API Gateway, DynamoDB
 
+## Architecture
+
+![App Architecture](https://s3-diagrams.s3.amazonaws.com/portfolio-be.png)
+
 ## Run Locally
 
 Clone the project
