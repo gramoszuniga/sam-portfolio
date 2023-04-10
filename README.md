@@ -8,7 +8,7 @@ AWS SAM function for static personal portfolio website.
 
 ## Architecture
 
-![App Architecture](https://s3-diagrams.s3.amazonaws.com/portfolio-be.png)
+![App Architecture](https://assets.gramoszuniga.net/portfolio-be.png)
 
 ## Run Locally
 
