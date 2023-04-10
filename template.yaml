@@ -32,6 +32,7 @@ Resources:
         Route53:
           HostedZoneId: !Ref HostedZoneId
         SecurityPolicy: TLS_1_2
+      OpenApiVersion: 3.0.1 # Prevents the creation of the default stage
       StageName: !Ref Stage
       Variables:
         AWS_LAMBDA_ALIAS: !Ref Stage
